@@ -5,22 +5,24 @@ import { ScrollArea } from '@/components/scroll-area'
 import FloatingHeader from '@/components/floating-header'
 import PageTitle from '@/components/page-title'
 import { Button } from '@/components/ui/button'
+import { getAllPosts } from '@/lib/contentful'
+import { getSortedPosts, getItemsByYear } from '@/lib/utils'
+import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
+import { WritingList } from '@/components/writing-list'
 // import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 // import { WritingList } from '@/components/writing-list'
 // import { FloatingHeader } from '@/components/floating-header'
 // import { PageTitle } from '@/components/page-title'
-// import { getAllPosts } from '@/lib/contentful'
-// import { getSortedPosts, getItemsByYear } from '@/lib/utils'
 
-// async function fetchData() {
-//   const allPosts = await getAllPosts()
-//   const sortedPosts = getSortedPosts(allPosts)
-//   const items = getItemsByYear(sortedPosts)
-//   return { items }
-// }
+async function fetchData() {
+  const allPosts = await getAllPosts()
+  const sortedPosts = getSortedPosts(allPosts)
+  const items = getItemsByYear(sortedPosts)
+  return { items }
+}
 
 export default async function Home() {
-  // const { items } = await fetchData()
+  const { items } = await fetchData()
 
   return (
     <ScrollArea useScrollAreaId={true}>
@@ -43,9 +45,10 @@ export default async function Home() {
               <h2 className='mb-4 mt-8'>Writing</h2>
             </Link>
           </Button>
-          {/* <Suspense fallback={<ScreenLoadingSpinner />}>
-            <WritingList items={items} header='Writing' />
-          </Suspense> */}
+          <Suspense fallback={<ScreenLoadingSpinner />}>
+            {/* <WritingList items={items} /> */}
+            <h1>WritingList</h1>
+          </Suspense>
         </div>
       </div>
     </ScrollArea>
