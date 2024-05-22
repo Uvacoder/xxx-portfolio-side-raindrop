@@ -1,53 +1,81 @@
-import { draftMode } from 'next/headers'
-import { Exo_2, Mukta } from 'next/font/google'
-import { EyeIcon } from 'lucide-react'
 import './globals.css'
 
-// import MenuContent from '@/components/menu-content'
-import { cn } from '@/lib/utils'
-
-import type { Metadata, Viewport } from 'next'
-import { sharedDescription, sharedTitle } from '@/constants/metadata'
-import { PROFILES } from '@/constants'
+import { draftMode } from 'next/headers'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+import { EyeIcon } from 'lucide-react'
 import SideMenu from '@/components/side-menu'
+import { Metadata } from 'next'
+import { sharedMetadata } from '@/constants/metadata'
+import { PROFILES } from '@/constants'
 
-const exo2 = Exo_2({
-  subsets: ['latin'],
-})
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { isEnabled } = draftMode()
+  // preloadGetAllPosts(isEnabled)
 
-const mukta = Mukta({
-  subsets: ['latin'],
-  weight: '400',
-})
+  return (
+    <html
+      lang='en'
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
+        <main vaul-drawer-wrapper='' className='min-h-screen bg-white'>
+          {isEnabled && (
+            <div className='absolute inset-x-0 bottom-0 z-50 flex h-12 w-full items-center justify-center bg-green-500 text-center text-sm font-medium text-white'>
+              <div className='flex items-center gap-2'>
+                <EyeIcon size={16} />
+                <span>Draft mode is enabled</span>
+              </div>
+            </div>
+          )}
+          <div className='lg:flex'>
+            <SideMenu>{/* <MenuContent /> */}</SideMenu>
+            <div className='flex flex-1'>{children}</div>
+          </div>
+        </main>
+        {/* <TailwindIndicator />
+        <SpeedInsights />
+        <Script
+          src='https://unpkg.com/@tinybirdco/flock.js'
+          data-host='https://api.tinybird.co'
+          data-token={process.env.NEXT_PUBLIC_TINYBIRD_TOKEN}
+          strategy='lazyOnload'
+        /> */}
+      </body>
+    </html>
+  )
+}
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://monsterpi13.dev'),
+  metadataBase: new URL('https://onur.dev'),
   robots: {
     index: true,
     follow: true,
   },
   title: {
-    template: `%s - ${sharedTitle}`,
-    default: sharedTitle,
+    default: sharedMetadata.title,
+    template: `%s — ${sharedMetadata.title}`,
   },
-  description: sharedDescription,
+  description: sharedMetadata.description,
+  keywords: ['Onur Şuyalçınkaya', 'Onur Suyalcinkaya', 'onur dev', 'onur.dev'],
   openGraph: {
     title: {
-      template: `%s - ${sharedTitle}`,
-      default: sharedTitle,
+      default: sharedMetadata.title,
+      template: `%s — ${sharedMetadata.title}`,
     },
-    description: sharedDescription,
+    description: sharedMetadata.description,
     type: 'website',
-    url: '/',
-    siteName: sharedTitle,
-    locale: 'zh_CN',
+    url: 'https://onur.dev',
+    siteName: sharedMetadata.title,
+    locale: 'en_IE',
   },
   alternates: {
     canonical: '/',
   },
   twitter: {
     card: 'summary_large_image',
-    site: `@${PROFILES.twitter.url}`,
+    site: `@${PROFILES.twitter.username}`,
     creator: `@${PROFILES.twitter.username}`,
   },
   other: {
@@ -55,35 +83,9 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: 'white',
   colorScheme: 'only light',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-}
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = draftMode()
-
-  return (
-    <html lang='en' className={cn(mukta.className, exo2.className)}>
-      <body>
-        <main vaul-drawer-wrapper='' className='flex min-h-screen bg-white'>
-          {isEnabled && (
-            <div className='absolute bottom-0 left-0 right-0 z-50 flex h-12 w-full items-center justify-center bg-green-500 text-center text-sm font-medium text-white'>
-              <div className='flex items-center gap-2'>
-                <EyeIcon size={16} />
-                <span>Draft mode is enabled</span>
-              </div>
-            </div>
-          )}
-          <div className='w-full lg:flex'>
-            <SideMenu>{/* <MenuContent /> */}</SideMenu>
-            <div className='flex flex-1'>{children}</div>
-          </div>
-        </main>
-      </body>
-    </html>
-  )
 }
