@@ -1,4 +1,15 @@
-export const sharedMetadata = {
+export type SharedMetadata = {
+  title: string
+  description: string
+  url: string
+  ogImage: {
+    width: number
+    height: number
+    type: string
+  }
+}
+
+export const sharedMetadata: SharedMetadata = {
   title: 'Onur Şuyalçınkaya',
   description: 'Software Engineer, DJ, writer, and minimalist, based in Amsterdam, The Netherlands',
   url: 'https://onur.dev',
