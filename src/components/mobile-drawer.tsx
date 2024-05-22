@@ -4,7 +4,7 @@ import { Drawer } from 'vaul'
 import { CommandIcon } from 'lucide-react'
 
 import { Button } from './ui/button'
-import MenuContent from './menu-content'
+import { MenuContent } from './menu-content'
 
 const MobileDrawer = () => {
   return (

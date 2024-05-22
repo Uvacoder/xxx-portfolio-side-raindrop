@@ -8,6 +8,7 @@ import SideMenu from '@/components/side-menu'
 import { Metadata } from 'next'
 import { sharedMetadata } from '@/constants/metadata'
 import { PROFILES } from '@/constants'
+import { MenuContent } from '@/components/menu-content'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -30,7 +31,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           )}
           <div className='lg:flex'>
-            <SideMenu>{/* <MenuContent /> */}</SideMenu>
+            <SideMenu>
+              <MenuContent />
+            </SideMenu>
             <div className='flex flex-1'>{children}</div>
           </div>
         </main>

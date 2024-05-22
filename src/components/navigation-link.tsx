@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { memo } from 'react'
 import { cn } from '@/lib/utils'
-import { ArrowUpRightIcon } from 'lucide-react'
+import { ArrowUpRightIcon, AtSignIcon } from 'lucide-react'
 
 // import { getPage } from '@/lib/contentful'
 
@@ -26,7 +26,7 @@ const NavigationLink = ({ href, label, Icon, shortcutNumber }: NavigationLinkPro
         href={href}
         target='_blank'
         rel='noopener noreferrer'
-        className='flex items-center justify-between gap-2 rounded-lg p-2 hover:bg-gray-200'
+        className='flex items-center justify-between gap-2 p-2 rounded-lg hover:bg-gray-200'
       >
         <span className='inline-flex items-center gap-2 font-medium'>
           {Icon} {label}
@@ -38,8 +38,9 @@ const NavigationLink = ({ href, label, Icon, shortcutNumber }: NavigationLinkPro
 
   let isActive = false
   if (pathname?.length > 0) {
-    const currentPathname = pathname.split('/')?.[1] ?? ''
-    isActive = href.slice(1) === currentPathname
+    const splittedPathname = pathname.split('/')
+    const currentPathname = splittedPathname[1] ?? ''
+    isActive = currentPathname === href.split('/')[1]
   }
 
   return (
