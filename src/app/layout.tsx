@@ -1,4 +1,4 @@
-import './globals.css'
+import '@/globals.css'
 
 import { draftMode } from 'next/headers'
 import { GeistSans } from 'geist/font/sans'

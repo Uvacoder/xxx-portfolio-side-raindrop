@@ -3,11 +3,13 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 const config = {
   darkMode: ['class'],
+  safelist: ['sh__line'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    'src/components/**/*.{js,ts,jsx,tsx,mdx,json}',
   ],
   prefix: '',
   theme: {

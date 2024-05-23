@@ -3,7 +3,7 @@ import 'server-only'
 import { cache } from 'react'
 import { isDevelopment } from '@/lib/utils'
 
-const fetchGraphQL = cache(async (query, preview = isDevelopment) => {
+const fetchGraphQL = cache(async (query: string, preview = isDevelopment) => {
   try {
     const res = await fetch(
       `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -60,7 +60,7 @@ export const getAllPosts = cache(async (preview = isDevelopment) => {
   }
 })
 
-export const getPost = cache(async (slug, preview = isDevelopment) => {
+export const getPost = cache(async (slug: string, preview = isDevelopment) => {
   try {
     const entry = await fetchGraphQL(
       `query {
@@ -96,6 +96,7 @@ export const getPost = cache(async (slug, preview = isDevelopment) => {
                     }
                   }
                 }
+
                 entries {
                   inline {
                     sys {
@@ -111,23 +112,9 @@ export const getPost = cache(async (slug, preview = isDevelopment) => {
                       title
                       code
                     }
-                    ... on Tweet {
-                      id
-                    }
-                    ... on Carousel {
-                      imagesCollection {
-                        items {
-                          title
-                          description
-                          url(transform: {
-                            format: AVIF,
-                            quality: 50
-                          })
-                        }
-                      }
-                    }
                   }
                 }
+                
               }
             }
             sys {
@@ -139,94 +126,10 @@ export const getPost = cache(async (slug, preview = isDevelopment) => {
       }`,
       preview
     )
-
     return entry?.data?.postCollection?.items?.[0] ?? null
   } catch (error) {
     console.info(error)
     return null
-  }
-})
-
-export const getWritingSeo = cache(async (slug, preview = isDevelopment) => {
-  try {
-    const entry = await fetchGraphQL(
-      `query {
-        postCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
-          items {
-            date
-            seo {
-              title
-              description
-              ogImageTitle
-              ogImageSubtitle
-              keywords
-            }
-            sys {
-              firstPublishedAt
-              publishedAt
-            }
-          }
-        }
-      }`,
-      preview
-    )
-
-    return entry?.data?.postCollection?.items?.[0] ?? null
-  } catch (error) {
-    console.info(error)
-    return null
-  }
-})
-
-export const getPageSeo = cache(async (slug, preview = isDevelopment) => {
-  try {
-    const entry = await fetchGraphQL(
-      `query {
-        pageCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
-          items {
-            seo {
-              title
-              description
-              ogImageTitle
-              ogImageSubtitle
-              keywords
-            }
-          }
-        }
-      }`,
-      preview
-    )
-
-    return entry?.data?.pageCollection?.items?.[0] ?? null
-  } catch (error) {
-    console.info(error)
-    return null
-  }
-})
-
-export const getAllPageSlugs = cache(async (preview = isDevelopment) => {
-  try {
-    const entries = await fetchGraphQL(
-      `query {
-        pageCollection(preview: ${preview}) {
-          items {
-            slug
-            hasCustomPage
-            sys {
-              id
-              firstPublishedAt
-              publishedAt
-            }
-          }
-        }
-      }`,
-      preview
-    )
-
-    return entries?.data?.pageCollection?.items ?? []
-  } catch (error) {
-    console.info(error)
-    return []
   }
 })
 
@@ -250,36 +153,21 @@ export const getAllPostSlugs = cache(async (preview = isDevelopment) => {
   }
 })
 
-export const getPage = cache(async (slug, preview = isDevelopment) => {
+export const getWritingSeo = cache(async (slug: string, preview = isDevelopment) => {
   try {
     const entry = await fetchGraphQL(
       `query {
-        pageCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
+        postCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
           items {
-            title
-            slug
-            content {
-              json
-              links {
-                assets {
-                  block {
-                    sys {
-                      id
-                    }
-                    url(transform: {
-                      format: AVIF,
-                      quality: 50
-                    })
-                    title
-                    width
-                    height
-                    description
-                  }
-                }
-              }
+            date
+            seo {
+              title
+              description
+              ogImageTitle
+              ogImageSubtitle
+              keywords
             }
             sys {
-              id
               firstPublishedAt
               publishedAt
             }
@@ -288,7 +176,31 @@ export const getPage = cache(async (slug, preview = isDevelopment) => {
       }`,
       preview
     )
+    return entry?.data?.postCollection?.items?.[0] ?? null
+  } catch (error) {
+    console.info(error)
+    return null
+  }
+})
 
+export const getPageSeo = cache(async (slug: string, preview = isDevelopment) => {
+  try {
+    const entry = await fetchGraphQL(
+      `query {
+        pageCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
+          items {
+            seo {
+              title
+              description
+              ogImageTitle
+              ogImageSubtitle
+              keywords
+            }
+          }
+        }
+      }`,
+      preview
+    )
     return entry?.data?.pageCollection?.items?.[0] ?? null
   } catch (error) {
     console.info(error)
@@ -296,34 +208,106 @@ export const getPage = cache(async (slug, preview = isDevelopment) => {
   }
 })
 
-export const getAllLogbook = cache(async (preview = isDevelopment) => {
-  try {
-    const entries = await fetchGraphQL(
-      `query {
-        logbookCollection(order: date_DESC, preview: ${preview}) {
-          items {
-            title
-            date
-            description
-            image {
-              url(transform: {
-                format: AVIF,
-                quality: 50
-              })
-              title
-              description
-              width
-              height
-            }
-          }
-        }
-      }`,
-      preview
-    )
+// export const getAllPageSlugs = cache(async (preview = isDevelopment) => {
+//   try {
+//     const entries = await fetchGraphQL(
+//       `query {
+//         pageCollection(preview: ${preview}) {
+//           items {
+//             slug
+//             hasCustomPage
+//             sys {
+//               id
+//               firstPublishedAt
+//               publishedAt
+//             }
+//           }
+//         }
+//       }`,
+//       preview
+//     )
 
-    return entries?.data?.logbookCollection?.items ?? []
-  } catch (error) {
-    console.info(error)
-    return []
-  }
-})
+//     return entries?.data?.pageCollection?.items ?? []
+//   } catch (error) {
+//     console.info(error)
+//     return []
+//   }
+// })
+
+// export const getPage = cache(async (slug, preview = isDevelopment) => {
+//   try {
+//     const entry = await fetchGraphQL(
+//       `query {
+//         pageCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
+//           items {
+//             title
+//             slug
+//             content {
+//               json
+//               links {
+//                 assets {
+//                   block {
+//                     sys {
+//                       id
+//                     }
+//                     url(transform: {
+//                       format: AVIF,
+//                       quality: 50
+//                     })
+//                     title
+//                     width
+//                     height
+//                     description
+//                   }
+//                 }
+//               }
+//             }
+//             sys {
+//               id
+//               firstPublishedAt
+//               publishedAt
+//             }
+//           }
+//         }
+//       }`,
+//       preview
+//     )
+
+//     return entry?.data?.pageCollection?.items?.[0] ?? null
+//   } catch (error) {
+//     console.info(error)
+//     return null
+//   }
+// })
+
+// export const getAllLogbook = cache(async (preview = isDevelopment) => {
+//   try {
+//     const entries = await fetchGraphQL(
+//       `query {
+//         logbookCollection(order: date_DESC, preview: ${preview}) {
+//           items {
+//             title
+//             date
+//             description
+//             image {
+//               url(transform: {
+//                 format: AVIF,
+//                 quality: 50
+//               })
+//               title
+//               description
+//               width
+//               height
+//             }
+//           }
+//         }
+//       }`,
+//       preview
+//     )
+
+//     return entries?.data?.logbookCollection?.items ?? []
+//   } catch (error) {
+//     console.info(error)
+//     return []
+//   }
+// })
