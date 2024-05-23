@@ -17,7 +17,11 @@ const config = {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px',
+        xs: '390px',
+        sm: '435px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
       },
     },
     extend: {
@@ -26,7 +30,7 @@ const config = {
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
+        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
       },
       keyframes: {
         reveal: {

@@ -96,7 +96,6 @@ export const getPost = cache(async (slug: string, preview = isDevelopment) => {
                     }
                   }
                 }
-
                 entries {
                   inline {
                     sys {
@@ -111,6 +110,21 @@ export const getPost = cache(async (slug: string, preview = isDevelopment) => {
                     ... on CodeBlock {
                       title
                       code
+                    }
+                    ... on Tweet {
+                      id
+                    }
+                    ... on Carousel {
+                      imagesCollection {
+                        items {
+                          title
+                          description
+                          url(transform: {
+                            format: AVIF,
+                            quality: 50
+                          })
+                        }
+                      }
                     }
                   }
                 }

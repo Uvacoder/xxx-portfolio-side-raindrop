@@ -6,7 +6,9 @@ export function Iframe({ embedUrl, title, className, ...rest }) {
     <ShowInView>
       <figure>
         <iframe
-          src={embedUrl}
+          src={
+            'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/840783349&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true'
+          }
           title={title}
           allowFullScreen
           className={cn('w-full rounded border-0 border-none shadow-lg', className)}
