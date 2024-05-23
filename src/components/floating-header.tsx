@@ -1,97 +1,130 @@
 'use client'
 
+import { memo, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import Balancer from 'react-wrap-balancer'
-import { ArrowLeftIcon } from 'lucide-react'
+import { ArrowLeftIcon, RadioIcon } from 'lucide-react'
+
+const MobileDrawer = dynamic(() =>
+  import('@/components/mobile-drawer').then((mod) => mod.MobileDrawer)
+)
+
+// const SubmitBookmarkDrawer = dynamic(
+//   () => import('@/components/submit-bookmark/drawer').then((mod) => mod.SubmitBookmarkDrawer),
+//   {
+//     loading: () => <LoadingSpinner />,
+//     ssr: false,
+//   }
+// )
 
 import { Button } from './ui/button'
-import MobileDrawer from './mobile-drawer'
 import { MOBILE_SCROLL_THRESHOLD, SCROLL_AREA_ID } from '@/constants'
+import LoadingSpinner from './loading-spinner'
 
-interface FloatingHeaderProps {
-  scrollTitle?: string
-  title?: string
-  goBackLink?: string
-}
-const FloatingHeader = ({
-  goBackLink,
-  scrollTitle,
-  title,
-  children,
-}: React.PropsWithChildren<FloatingHeaderProps>) => {
-  const [transformValues, setTransformValues] = useState({
-    translateY: 0,
-    opacity: scrollTitle ? 0 : 1,
-  })
+// eslint-disable-next-line react/display-name
+export const FloatingHeader = memo(
+  ({ scrollTitle, title, goBackLink, bookmarks, currentBookmark, children }) => {
+    const [transformValues, setTransformValues] = useState({
+      translateY: 0,
+      opacity: scrollTitle ? 0 : 1,
+    })
+    const pathname = usePathname()
+    const isWritingIndexPage = pathname === '/writing'
+    const isWritingPath = pathname.startsWith('/writing')
+    const isBookmarksIndexPage = pathname === '/bookmarks'
+    const isBookmarkPath = pathname.startsWith('/bookmarks')
 
-  useEffect(() => {
-    const scrollAreaElem = document.querySelector(`#${SCROLL_AREA_ID}`)
+    useEffect(() => {
+      const scrollAreaElem = document.querySelector(`#${SCROLL_AREA_ID}`)
 
-    const onScroll = (e: Event) => {
-      const scrollY = (e.target as HTMLElement).scrollTop
+      const onScroll = (e) => {
+        const scrollY = e.target.scrollTop
 
-      const translateY = Math.max(100 - scrollY, 0)
-      const opacity = Math.min(
-        Math.max(
-          +(
-            (scrollY - MOBILE_SCROLL_THRESHOLD * (MOBILE_SCROLL_THRESHOLD / (scrollY ** 2 / 100))) /
-            100
-          ).toFixed(2),
-          0
-        ),
-        1
-      )
+        const translateY = Math.max(100 - scrollY, 0)
+        const opacity = Math.min(
+          Math.max(
+            (
+              (scrollY -
+                MOBILE_SCROLL_THRESHOLD * (MOBILE_SCROLL_THRESHOLD / (scrollY ** 2 / 100))) /
+              100
+            ).toFixed(2),
+            0
+          ),
+          1
+        )
 
-      setTransformValues({ translateY, opacity })
-    }
+        setTransformValues({ translateY, opacity })
+      }
 
-    if (scrollTitle && scrollAreaElem) {
-      scrollAreaElem.addEventListener('scroll', onScroll, {
-        passive: true,
-      })
-    }
-    return () => scrollAreaElem?.removeEventListener('scroll', onScroll)
-  }, [scrollTitle])
+      if (scrollTitle) {
+        scrollAreaElem?.addEventListener('scroll', onScroll, {
+          passive: true,
+        })
+      }
+      return () => scrollAreaElem?.removeEventListener('scroll', onScroll)
+    }, [scrollTitle])
 
-  return (
-    <header className='sticky inset-x-0 top-0 z-10 mx-auto flex h-12 w-full shrink-0 items-center overflow-hidden border-b bg-white text-sm font-medium lg:hidden'>
-      <div className='flex h-full w-full items-center px-3'>
-        <div className='flex w-full items-center justify-between gap-2'>
-          <div className='flex flex-1 items-center gap-1'>
-            {goBackLink ? (
-              <Button variant='ghost' size='icon' className='shrink-0' asChild>
-                <Link href={goBackLink} title='Go back'>
-                  <ArrowLeftIcon size={16} />
-                </Link>
-              </Button>
-            ) : (
-              <MobileDrawer />
-            )}
-            <div className='flex flex-1 items-center justify-between'>
-              {scrollTitle && (
-                <span
-                  className='line-clamp-2 font-semibold tracking-tight'
-                  style={{
-                    transform: `translateY(${transformValues.translateY}%)`,
-                    opacity: transformValues.opacity,
-                  }}
-                >
-                  {scrollTitle}
-                </span>
+    return (
+      <header className='sticky inset-x-0 top-0 z-10 mx-auto flex h-12 w-full shrink-0 items-center overflow-hidden border-b bg-white text-sm font-medium lg:hidden'>
+        <div className='flex size-full items-center px-3'>
+          <div className='flex w-full items-center justify-between gap-2'>
+            <div className='flex flex-1 items-center gap-1'>
+              {goBackLink ? (
+                <Button variant='ghost' size='icon' className='shrink-0' asChild>
+                  <Link href={goBackLink} title='Go back'>
+                    <ArrowLeftIcon size={16} />
+                  </Link>
+                </Button>
+              ) : (
+                <MobileDrawer />
               )}
-              {title && (
-                <Balancer ratio={0.35}>
-                  <span className='line-clamp-2 font-semibold tracking-tight'>{title}</span>
-                </Balancer>
-              )}
+              <div className='flex flex-1 items-center justify-between'>
+                {scrollTitle && (
+                  <span
+                    className='line-clamp-2 font-semibold tracking-tight'
+                    style={{
+                      transform: `translateY(${transformValues.translateY}%)`,
+                      opacity: transformValues.opacity,
+                    }}
+                  >
+                    {scrollTitle}
+                  </span>
+                )}
+                {title && (
+                  <Balancer ratio={0.35}>
+                    <span className='line-clamp-2 font-semibold tracking-tight'>{title}</span>
+                  </Balancer>
+                )}
+                <div className='flex items-center gap-2'>
+                  {(isWritingIndexPage || isBookmarksIndexPage) && (
+                    <Button variant='outline' size='xs' asChild>
+                      <a
+                        href={isWritingIndexPage ? '/writing.xml' : '/bookmarks.xml'}
+                        title='RSS feed'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        <RadioIcon size={16} className='mr-2' />
+                        RSS feed
+                      </a>
+                    </Button>
+                  )}
+                  {/* {isBookmarkPath && (
+                    <SubmitBookmarkDrawer bookmarks={bookmarks} currentBookmark={currentBookmark} />
+                  )} */}
+                  <h1>SubmitBookmarkDrawer</h1>
+                </div>
+              </div>
             </div>
+            {/* This is a hack to show writing views with framer motion reveal effect */}
+            {scrollTitle && isWritingPath && (
+              <div className='flex min-w-[50px] justify-end'>{children}</div>
+            )}
           </div>
-          {scrollTitle && <div className='flex min-w-[50px] justify-end'>{children}</div>}
         </div>
-      </div>
-    </header>
-  )
-}
-
-export default FloatingHeader
+      </header>
+    )
+  }
+)
