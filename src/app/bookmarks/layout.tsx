@@ -25,7 +25,7 @@ export default async function BookmarksLayout({ children }) {
         <SideMenu title='Bookmarks' bookmarks={bookmarks} isInner>
           <Suspense fallback={<ScreenLoadingSpinner />}>
             <div className='flex flex-col gap-1 text-sm'>
-              {/* {bookmarks?.map((bookmark) => {
+              {bookmarks?.map((bookmark) => {
                 return (
                   <ListItem
                     key={bookmark._id}
@@ -34,19 +34,19 @@ export default async function BookmarksLayout({ children }) {
                     description={`${bookmark.count} bookmarks`}
                   />
                 )
-              })} */}
+              })}
             </div>
           </Suspense>
         </SideMenu>
         <div className='lg:bg-grid flex-1'>{children}</div>
       </div>
-      {/* <Toaster
+      <Toaster
         closeButton
         richColors
         toastOptions={{
           duration: 5000,
         }}
-      /> */}
+      />
     </>
   )
 }

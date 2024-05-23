@@ -2,17 +2,13 @@ import { Suspense } from 'react'
 import Link from 'next/link'
 
 import { ScrollArea } from '@/components/scroll-area'
-import FloatingHeader from '@/components/floating-header'
 import PageTitle from '@/components/page-title'
 import { Button } from '@/components/ui/button'
 import { getAllPosts } from '@/lib/contentful'
 import { getSortedPosts, getItemsByYear } from '@/lib/utils'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { WritingList } from '@/components/writing-list'
-// import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
-// import { WritingList } from '@/components/writing-list'
-// import { FloatingHeader } from '@/components/floating-header'
-// import { PageTitle } from '@/components/page-title'
+import { FloatingHeader } from '@/components/floating-header'
 
 async function fetchData() {
   const allPosts = await getAllPosts()

@@ -5,9 +5,9 @@ import { ScrollArea } from '@/components/scroll-area'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { GradientBg3 } from '@/components/gradient-bg'
 import { getAllLogbook, getPageSeo } from '@/lib/contentful'
-import FloatingHeader from '@/components/floating-header'
 import PageTitle from '@/components/page-title'
 import { JourneyCard } from './_components/journey-card'
+import { FloatingHeader } from '@/components/floating-header'
 
 async function fetchData() {
   const allLogbook = await getAllLogbook()

@@ -4,10 +4,10 @@ import { notFound } from 'next/navigation'
 import { ScrollArea } from '@/components/scroll-area'
 import { getPost, getWritingSeo, getAllPostSlugs } from '@/lib/contentful'
 import { getDateTimeFormat, isDevelopment } from '@/lib/utils'
-import FloatingHeader from '@/components/floating-header'
 import PageTitle from '@/components/page-title'
 import { WritingViews } from '@/components/writing-views'
 import { RichText } from '@/components/contentful/rich-text'
+import { FloatingHeader } from '@/components/floating-header'
 
 export async function generateStaticParams() {
   const allPosts = await getAllPostSlugs()

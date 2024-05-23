@@ -5,7 +5,7 @@ import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { WritingListLayout } from '@/components/writing/writing-list-layout'
 import { getPageSeo, getAllPosts } from '@/lib/contentful'
 import { getSortedPosts } from '@/lib/utils'
-import FloatingHeader from '@/components/floating-header'
+import { FloatingHeader } from '@/components/floating-header'
 
 async function fetchData() {
   const allPosts = await getAllPosts()
