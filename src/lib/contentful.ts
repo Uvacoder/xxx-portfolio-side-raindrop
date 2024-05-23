@@ -294,34 +294,33 @@ export const getPageSeo = cache(async (slug: string, preview = isDevelopment) =>
 //   }
 // })
 
-// export const getAllLogbook = cache(async (preview = isDevelopment) => {
-//   try {
-//     const entries = await fetchGraphQL(
-//       `query {
-//         logbookCollection(order: date_DESC, preview: ${preview}) {
-//           items {
-//             title
-//             date
-//             description
-//             image {
-//               url(transform: {
-//                 format: AVIF,
-//                 quality: 50
-//               })
-//               title
-//               description
-//               width
-//               height
-//             }
-//           }
-//         }
-//       }`,
-//       preview
-//     )
-
-//     return entries?.data?.logbookCollection?.items ?? []
-//   } catch (error) {
-//     console.info(error)
-//     return []
-//   }
-// })
+export const getAllLogbook = cache(async (preview = isDevelopment) => {
+  try {
+    const entries = await fetchGraphQL(
+      `query {
+        logbookCollection(order: date_DESC, preview: ${preview}) {
+          items {
+            title
+            date
+            description
+            image {
+              url(transform: {
+                format: AVIF,
+                quality: 50
+              })
+              title
+              description
+              width
+              height
+            }
+          }
+        }
+      }`,
+      preview
+    )
+    return entries?.data?.logbookCollection?.items ?? []
+  } catch (error) {
+    console.info(error)
+    return []
+  }
+})
