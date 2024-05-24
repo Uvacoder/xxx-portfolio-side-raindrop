@@ -10,7 +10,7 @@ export type SharedMetadata = {
 }
 
 export const sharedMetadata: SharedMetadata = {
-  title: 'Onur Şuyalçınkaya',
+  title: 'Nam Khanh Nguyen',
   description: 'Software Engineer, DJ, writer, and minimalist, based in Amsterdam, The Netherlands',
   url: 'https://onur.dev',
   ogImage: {

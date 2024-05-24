@@ -14,11 +14,7 @@ async function fetchData() {
 }
 
 export default async function Writing() {
-  // const { bookmarks } = await fetchData()
-  const bookmarks = [
-    { _id: '1', title: 'Bookmark 1', count: 1 },
-    { _id: '2', title: 'Bookmark 2', count: 2 },
-  ]
+  const { bookmarks } = await fetchData()
 
   return (
     <ScrollArea className='lg:hidden'>

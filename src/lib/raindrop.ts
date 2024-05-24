@@ -1,4 +1,5 @@
-import 'server-only'
+'use server'
+
 import { cache } from 'react'
 import { COLLECTION_IDS } from '@/constants'
 
@@ -52,3 +53,7 @@ export const getBookmark = cache(async (id) => {
     return null
   }
 })
+
+export async function getBookmarkItemsByPageIndex(id, pageIndex) {
+  return await getBookmarkItems(id, pageIndex)
+}

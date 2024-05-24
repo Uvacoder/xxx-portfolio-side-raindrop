@@ -2,12 +2,11 @@
 
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { ArrowDownIcon } from 'lucide-react'
-
-// import { getBookmarkItemsByPageIndex } from '@/app/actions'
 import { cn } from '@/lib/utils'
 import { TWEETS_COLLECTION_ID } from '@/constants'
 import { BookmarkCard } from './bookmark-card'
 import { Button } from '@/components/ui/button'
+import { getBookmarkItemsByPageIndex } from '@/lib/raindrop'
 
 export const BookmarkList = ({ initialData, id }) => {
   const [data, setData] = useState(initialData?.result ? initialData?.items : [])
