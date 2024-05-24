@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
-
 import { ScrollArea } from '@/components/scroll-area'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { getPageSeo } from '@/lib/contentful'
@@ -15,7 +14,11 @@ async function fetchData() {
 }
 
 export default async function Writing() {
-  const { bookmarks } = await fetchData()
+  // const { bookmarks } = await fetchData()
+  const bookmarks = [
+    { _id: '1', title: 'Bookmark 1', count: 1 },
+    { _id: '2', title: 'Bookmark 2', count: 2 },
+  ]
 
   return (
     <ScrollArea className='lg:hidden'>
