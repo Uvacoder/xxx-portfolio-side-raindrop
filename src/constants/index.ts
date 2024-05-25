@@ -101,6 +101,11 @@ export const LINKS = [
     label: 'Bookmarks',
     Icon: BookmarkIcon,
   },
+  {
+    href: '/projects',
+    label: 'Projects',
+    Icon: BookmarkIcon,
+  },
 ]
 
 export const TWEETS_COLLECTION_ID = 15896982
