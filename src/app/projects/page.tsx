@@ -63,8 +63,8 @@ export default async function PageSlug({ params }) {
       <GradientBg />
       <FloatingHeader scrollTitle={title} />
       <div className='content-wrapper'>
-        <div className='mx-auto mb-16 max-w-5xl px-5 py-24 sm:px-8'>
-          <PageTitle title={title} />
+        <div className='mx-auto mb-16 max-w-5xl px-5 sm:px-8'>
+          <PageTitle title={title} className='pl-2' />
           <Suspense fallback={<ScreenLoadingSpinner />}>
             <ProjectCards projects={projects} />
           </Suspense>
