@@ -324,3 +324,113 @@ export const getAllLogbook = cache(async (preview = isDevelopment) => {
     return []
   }
 })
+
+export const getAllProjects = cache(async (preview = isDevelopment) => {
+  try {
+    const entries = await fetchGraphQL(
+      `query {
+        projectCollection(preview: ${preview}) {
+          items {
+            name
+            description
+            homepage
+            github
+            techstackCollection {
+              items {
+                  label
+              }
+            }
+            slug
+          }
+        }
+      }`,
+      preview
+    )
+    return entries?.data?.projectCollection?.items ?? []
+  } catch (error) {
+    console.info(error)
+    return []
+  }
+})
+
+export const getProject = cache(async (slug: string, preview = isDevelopment) => {
+  try {
+    const entry = await fetchGraphQL(
+      `query {
+        projectCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
+          items {
+
+
+            content {
+              json
+              links {
+                assets {
+                  block {
+                    sys {
+                      id
+                    }
+                    url(transform: {
+                      format: AVIF,
+                      quality: 50
+                    })
+                    title
+                    width
+                    height
+                    description
+                    contentfulMetadata {
+                      tags {
+                        name
+                      }
+                    }
+                  }
+                }
+                entries {
+                  inline {
+                    sys {
+                      id
+                    }
+                    __typename
+                    ... on ContentEmbed {
+                      title
+                      embedUrl
+                      type
+                    }
+                    ... on CodeBlock {
+                      title
+                      code
+                    }
+                    ... on Tweet {
+                      id
+                    }
+                    ... on Carousel {
+                      imagesCollection {
+                        items {
+                          title
+                          description
+                          url(transform: {
+                            format: AVIF,
+                            quality: 50
+                          })
+                        }
+                      }
+                    }
+                  }
+                }
+                
+              }
+            }
+            sys {
+              firstPublishedAt
+              publishedAt
+            }
+          }
+        }
+      }`,
+      preview
+    )
+    return entry?.data?.projectCollection?.items?.[0] ?? null
+  } catch (error) {
+    console.info(error)
+    return null
+  }
+})

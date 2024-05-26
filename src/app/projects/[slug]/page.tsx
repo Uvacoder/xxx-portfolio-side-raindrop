@@ -8,6 +8,8 @@ import { GradientBg } from '@/components/gradient-bg'
 import { FloatingHeader } from '@/components/floating-header'
 import { Suspense } from 'react'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
+import { RichText } from '@/components/contentful/rich-text'
+import { getProject } from '@/lib/contentful'
 
 type ProjectPageProps = {
   params: {
@@ -16,7 +18,7 @@ type ProjectPageProps = {
   searchParams: Record<string, never>
 }
 
-const ProjectPage = (props: ProjectPageProps) => {
+const ProjectPage = async (props: ProjectPageProps) => {
   const {
     params: { slug },
   } = props
@@ -35,6 +37,7 @@ const ProjectPage = (props: ProjectPageProps) => {
   }
 
   const { metadata } = project
+  const content = await getProject(slug)
 
   return (
     <ScrollArea useScrollAreaId>
@@ -53,7 +56,7 @@ const ProjectPage = (props: ProjectPageProps) => {
                 className='my-12 rounded-lg'
                 lazy={false}
               />
-              {/* <Mdx content={content} /> */}
+              <RichText content={content.content} />
             </div>
           </Suspense>
         </div>

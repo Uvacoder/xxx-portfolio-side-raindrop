@@ -14,6 +14,7 @@ import {
   AtSignIcon,
   InstagramIcon,
   YoutubeIcon,
+  AwardIcon,
 } from 'lucide-react'
 
 export const PROFILES = {
@@ -82,6 +83,11 @@ export const LINKS = [
     Icon: PencilLineIcon,
   },
   {
+    href: '/projects',
+    label: 'Projects',
+    Icon: AwardIcon,
+  },
+  {
     href: '/journey',
     label: 'Journey',
     Icon: NavigationIcon,
@@ -99,11 +105,6 @@ export const LINKS = [
   {
     href: '/bookmarks',
     label: 'Bookmarks',
-    Icon: BookmarkIcon,
-  },
-  {
-    href: '/projects',
-    label: 'Projects',
     Icon: BookmarkIcon,
   },
 ]
