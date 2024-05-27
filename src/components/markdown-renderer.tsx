@@ -2,6 +2,7 @@ import Markdown from 'markdown-to-jsx'
 
 import { Link } from '@/components/link'
 import { TweetCard } from '@/components/tweet-card/tweet-card'
+import NextImage from 'next/image'
 
 export const MarkdownRenderer = ({ options, ...rest }) => {
   return (
@@ -15,15 +16,13 @@ export const MarkdownRenderer = ({ options, ...rest }) => {
           p: ({ children }) => <p className='mb-2 text-sm'>{children}</p>,
           img: ({ alt, src }) => (
             <span className='mt-2 block overflow-hidden rounded-xl border'>
-              <img
+              <NextImage
                 alt={alt}
                 src={`https:${src}`}
                 width={400}
                 height={300}
                 loading='lazy'
                 className='aspect-auto w-full animate-reveal object-cover'
-                // eslint-disable-next-line react/no-unknown-property
-                nopin='nopin'
               />
             </span>
           ),

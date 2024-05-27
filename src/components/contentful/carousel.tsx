@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import NextImage from 'next/image'
 
 import {
   Carousel,
@@ -45,7 +46,7 @@ export function CarouselCmp({ images = [] }) {
               <div className='p-1'>
                 <Card>
                   <CardContent className='flex aspect-square items-center justify-center p-0'>
-                    <img
+                    <NextImage
                       src={imageItem.url}
                       alt={imageItem.title}
                       loading='lazy'

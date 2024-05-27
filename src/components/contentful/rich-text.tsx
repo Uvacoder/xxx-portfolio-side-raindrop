@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link } from '@/components/link'
+import NextImage from 'next/image'
 
 const TweetCard = dynamic(() =>
   import('@/components/tweet-card/tweet-card').then((mod) => mod.TweetCard)
@@ -87,15 +88,13 @@ function options(links) {
 
         return (
           <figure className='mb-6 flex flex-col gap-2 overflow-hidden rounded-xl'>
-            <img
+            <NextImage
               src={asset.url}
               width={asset.width || 400}
               height={asset.height || 300}
               alt={asset.description || asset.title}
               loading={isEagerLoading ? 'eager' : 'lazy'}
               className='animate-reveal'
-              // eslint-disable-next-line react/no-unknown-property
-              nopin='nopin'
             />
             {asset.description && (
               <figcaption className='break-all text-center text-xs font-light text-gray-500'>

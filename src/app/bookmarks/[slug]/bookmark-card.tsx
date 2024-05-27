@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import { Link2Icon } from 'lucide-react'
 import { TWEETS_COLLECTION_ID } from '@/constants'
+import NextImage from 'next/image'
 
 const TweetCard = dynamic(() =>
   import('@/components/tweet-card/tweet-card').then((mod) => mod.TweetCard)
@@ -23,7 +24,7 @@ export const BookmarkCard = ({ bookmark, order }) => {
       data-bookmark-order={order}
     >
       <span className='aspect-[1200/630] overflow-hidden rounded-lg'>
-        <img
+        <NextImage
           src={bookmark.cover || '/assets/fallback.avif'}
           alt={bookmark.title}
           width={1200}
@@ -34,8 +35,6 @@ export const BookmarkCard = ({ bookmark, order }) => {
             e.target.onerror = null
             e.target.src = '/assets/fallback.avif'
           }}
-          // eslint-disable-next-line react/no-unknown-property
-          nopin='nopin'
         />
       </span>
       <div className='flex flex-col gap-1'>

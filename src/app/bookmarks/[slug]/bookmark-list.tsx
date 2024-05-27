@@ -98,7 +98,7 @@ export const BookmarkList = ({ initialData, id }) => {
               )}
             </>
           ) : (
-            <span>That's all for now. Come back later for more.</span>
+            <span>That&apos;s all for now. Come back later for more.</span>
           )}
         </div>
       ) : (
