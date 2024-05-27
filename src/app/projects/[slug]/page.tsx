@@ -10,6 +10,8 @@ import { Suspense } from 'react'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { RichText } from '@/components/contentful/rich-text'
 import { getProject } from '@/lib/contentful'
+import { draftMode } from 'next/headers'
+import { isDevelopment } from '@/lib/utils'
 
 type ProjectPageProps = {
   params: {
@@ -18,45 +20,38 @@ type ProjectPageProps = {
   searchParams: Record<string, never>
 }
 
-const ProjectPage = async (props: ProjectPageProps) => {
-  const {
-    params: { slug },
-  } = props
-
-  const project = {
-    metadata: {
-      name: 'Project Name',
-      description: 'Project Description',
-      homepage: 'https://example.com',
-      github: '',
-    },
+async function fetchData(slug: string) {
+  const { isEnabled } = draftMode()
+  const data = await getProject(slug, isDevelopment ? true : isEnabled)
+  if (!data) notFound()
+  return {
+    data,
   }
+}
 
-  if (!project) {
-    notFound()
-  }
-
-  const { metadata } = project
-  const content = await getProject(slug)
+const ProjectPage = async ({ params }: ProjectPageProps) => {
+  const { slug } = params
+  const { data } = await fetchData(slug)
+  const { name, description, homepage, github, content } = data
 
   return (
     <ScrollArea useScrollAreaId>
       <GradientBg />
-      <FloatingHeader scrollTitle={project.metadata.name} />
+      <FloatingHeader scrollTitle={name} />
       <div className='content-wrapper'>
         <div className='mx-auto mb-16 max-w-5xl px-5 sm:px-8'>
           <Suspense fallback={<ScreenLoadingSpinner />}>
             <div className='mx-auto max-w-3xl'>
-              <Header metadata={metadata} />
+              <Header name={name} description={description} homepage={homepage} github={github} />
               <BlurImage
                 src={`/images/projects/${slug}/cover.png`}
                 width={1280}
                 height={832}
-                alt={metadata.name}
+                alt={name}
                 className='my-12 rounded-lg'
                 lazy={false}
               />
-              <RichText content={content.content} />
+              <RichText content={content} />
             </div>
           </Suspense>
         </div>

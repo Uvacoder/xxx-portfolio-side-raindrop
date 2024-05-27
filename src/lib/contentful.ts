@@ -359,8 +359,10 @@ export const getProject = cache(async (slug: string, preview = isDevelopment) =>
       `query {
         projectCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
           items {
-
-
+            name
+            description
+            homepage
+            github
             content {
               json
               links {

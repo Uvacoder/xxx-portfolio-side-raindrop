@@ -17,13 +17,15 @@ const animation = {
   },
 }
 
-const Header = (props: HeaderProps) => {
-  const {
-    metadata: { name, description, homepage, github },
-  } = props
+type HeaderProps = {
+  name: string
+  description: string
+  homepage: string
+  github: string
+}
 
+const Header = ({ name, description, homepage, github }: HeaderProps) => {
   const repo = github.split('/').pop()
-
   return (
     <div className='space-y-8'>
       <motion.div
