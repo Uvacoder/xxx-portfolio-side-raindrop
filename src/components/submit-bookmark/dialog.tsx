@@ -31,11 +31,11 @@ export const SubmitBookmarkDialog = ({ bookmarks, currentBookmark }) => {
           <DialogTitle>{SUBMIT_BOOKMARK_FORM_TITLE}</DialogTitle>
           <DialogDescription>{SUBMIT_BOOKMARK_FORM_DESCRIPTION}</DialogDescription>
         </DialogHeader>
-        {/* <SubmitBookmarkForm
+        <SubmitBookmarkForm
           setFormOpen={setOpen}
           bookmarks={bookmarks}
           currentBookmark={currentBookmark}
-        /> */}
+        />
       </DialogContent>
     </Dialog>
   )

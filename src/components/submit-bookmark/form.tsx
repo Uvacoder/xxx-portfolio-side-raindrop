@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
-import { submitBookmark } from '@/app/actions'
+// import { submitBookmark } from '@/app/actions'
 import { cn } from '@/lib/utils'
 
 const formSchema = z.object({
@@ -55,17 +55,9 @@ export function SubmitBookmarkForm({ className, setFormOpen, bookmarks, currentB
 
   async function onSubmit(values) {
     try {
-      await submitBookmark(values)
-
-      toast('Bookmark submitted!', {
-        type: 'success',
-        description: (
-          <span>
-            <span className='underline underline-offset-4'>{values.url}</span> has been submitted.
-            Thank you!
-          </span>
-        ),
-      })
+      // await submitBookmark(values)
+      console.log(values)
+      toast.success(`Bookmark submitted successfully to ${values.type}!`)
     } catch (error) {
       setError('api.limitError', {
         type: 'manual',

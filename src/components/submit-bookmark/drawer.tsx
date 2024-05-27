@@ -31,12 +31,12 @@ export const SubmitBookmarkDrawer = ({ bookmarks, currentBookmark }) => {
           <DrawerTitle>{SUBMIT_BOOKMARK_FORM_TITLE}</DrawerTitle>
           <DrawerDescription className='m-0'>{SUBMIT_BOOKMARK_FORM_DESCRIPTION}</DrawerDescription>
         </DrawerHeader>
-        {/* <SubmitBookmarkForm
+        <SubmitBookmarkForm
           setFormOpen={setOpen}
           bookmarks={bookmarks}
           currentBookmark={currentBookmark}
           className='py-8'
-        /> */}
+        />
       </DrawerContent>
     </Drawer>
   )
