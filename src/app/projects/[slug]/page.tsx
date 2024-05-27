@@ -5,13 +5,13 @@ import Header from './header'
 import { BlurImage } from '../ui'
 import { ScrollArea } from '@/components/scroll-area'
 import { GradientBg } from '@/components/gradient-bg'
-import { FloatingHeader } from '@/components/floating-header'
 import { Suspense } from 'react'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { RichText } from '@/components/contentful/rich-text'
 import { getProject } from '@/lib/contentful'
 import { draftMode } from 'next/headers'
 import { isDevelopment } from '@/lib/utils'
+import { FloatingHeader } from '@/components/floating-header'
 
 type ProjectPageProps = {
   params: {

@@ -1,23 +1,15 @@
 'use client'
 
-import { memo, useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
+import { Suspense, memo, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Balancer from 'react-wrap-balancer'
 import { ArrowLeftIcon, RadioIcon } from 'lucide-react'
-import { LoadingSpinner } from '@/components/loading-spinner'
 import { Button } from './ui/button'
 import { MOBILE_SCROLL_THRESHOLD, SCROLL_AREA_ID } from '@/constants'
 import MobileDrawer from './mobile-drawer'
-
-// const SubmitBookmarkDrawer = dynamic(
-//   () => import('@/components/submit-bookmark/drawer').then((mod) => mod.SubmitBookmarkDrawer),
-//   {
-//     loading: () => <LoadingSpinner />,
-//     ssr: false,
-//   }
-// )
+import { SubmitBookmarkDrawer } from './submit-bookmark/drawer'
+import LoadingSpinner from './loading-spinner'
 
 export const FloatingHeader = ({
   scrollTitle,
@@ -32,6 +24,7 @@ export const FloatingHeader = ({
     opacity: scrollTitle ? 0 : 1,
   })
   const pathname = usePathname()
+  console.log(pathname)
   const isWritingIndexPage = pathname === '/writing'
   const isWritingPath = pathname.startsWith('/writing')
   const isBookmarksIndexPage = pathname === '/bookmarks'
@@ -107,9 +100,11 @@ export const FloatingHeader = ({
                     </a>
                   </Button>
                 )}
-                {/* {isBookmarkPath && (
+                {isBookmarkPath && (
+                  <Suspense fallback={<LoadingSpinner />}>
                     <SubmitBookmarkDrawer bookmarks={bookmarks} currentBookmark={currentBookmark} />
-                  )} */}
+                  </Suspense>
+                )}
               </div>
             </div>
           </div>

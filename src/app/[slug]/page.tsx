@@ -2,13 +2,13 @@ import { Suspense } from 'react'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { ScrollArea } from '@/components/scroll-area'
-import { FloatingHeader } from '@/components/floating-header'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { GradientBg } from '@/components/gradient-bg'
 import { RichText } from '@/components/contentful/rich-text'
 import { getPage, getPageSeo, getAllPageSlugs } from '@/lib/contentful'
 import { isDevelopment } from '@/lib/utils'
 import PageTitle from '@/components/page-title'
+import { FloatingHeader } from '@/components/floating-header'
 
 export async function generateStaticParams() {
   const allPages = await getAllPageSlugs()

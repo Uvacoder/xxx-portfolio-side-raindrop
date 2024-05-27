@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
 import { ScrollArea } from '@/components/scroll-area'
-import { FloatingHeader } from '@/components/floating-header'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { GradientBg } from '@/components/gradient-bg'
 import { getAllProjects } from '@/lib/contentful'
 import PageTitle from '@/components/page-title'
 import ProjectCards from './project-cards'
+import { FloatingHeader } from '@/components/floating-header'
 
 async function fetchData() {
   const projects = await getAllProjects(true)

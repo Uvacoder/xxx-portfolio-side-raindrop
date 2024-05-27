@@ -2,12 +2,12 @@ import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 
 import { ScrollArea } from '@/components/scroll-area'
-import { FloatingHeader } from '@/components/floating-header'
 import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
 import { getBookmarkItems, getBookmarks } from '@/lib/raindrop'
 import { sortByProperty } from '@/lib/utils'
 import PageTitle from '@/components/page-title'
 import { BookmarkList } from './bookmark-list'
+import { FloatingHeader } from '@/components/floating-header'
 
 export async function generateStaticParams() {
   const bookmarks = await getBookmarks()

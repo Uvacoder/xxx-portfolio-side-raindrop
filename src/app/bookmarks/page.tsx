@@ -13,7 +13,7 @@ async function fetchData() {
   return { bookmarks: sortedBookmarks }
 }
 
-export default async function Writing() {
+export default async function Bookmarks() {
   const { bookmarks } = await fetchData()
 
   return (

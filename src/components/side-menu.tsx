@@ -8,7 +8,9 @@ import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
 import { ScrollArea } from './scroll-area'
 import { useKeyPress } from '@/hooks/useKeyPress'
-import React from 'react'
+import React, { Suspense } from 'react'
+import LoadingSpinner from './loading-spinner'
+import { SubmitBookmarkDialog } from './submit-bookmark/dialog'
 
 type Bookmark = {
   slug: string
@@ -73,9 +75,11 @@ const SideMenu = ({
                   </a>
                 </Button>
               )}
-              {/* {isBookmarksPath && (
-                <SubmitBookmarkDialog bookmarks={bookmarks} currentBookmark={currentBookmark} />
-              )} */}
+              {isBookmarksPath && (
+                <Suspense fallback={<LoadingSpinner />}>
+                  <SubmitBookmarkDialog bookmarks={bookmarks} currentBookmark={currentBookmark} />
+                </Suspense>
+              )}
             </div>
           </div>
         </div>

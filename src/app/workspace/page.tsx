@@ -9,13 +9,13 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { ScrollArea } from '@/components/scroll-area'
-import { FloatingHeader } from '@/components/floating-header'
 import { GradientBg4 } from '@/components/gradient-bg'
 import { Link } from '@/components/link'
 import { getPageSeo } from '@/lib/contentful'
 import { isExternalLink } from '@/lib/utils'
 import PageTitle from '@/components/page-title'
 import { WORKSPACE_ITEMS } from '@/constants'
+import { FloatingHeader } from '@/components/floating-header'
 
 export default async function Workspace() {
   return (
