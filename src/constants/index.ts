@@ -34,40 +34,15 @@ export const PROFILES = {
     url: 'https://www.linkedin.com/in/%E9%B9%8F-%E9%98%AE-764b91215/',
     Icon: LinkedinIcon,
   },
-  medium: {
-    title: 'Medium',
-    url: 'https://suyalcinkaya.medium.com',
-    Icon: AtSignIcon,
-  },
   instagram: {
     title: 'Instagram',
     url: 'https://www.instagram.com/jgrmn',
     Icon: InstagramIcon,
   },
-  soundcloud: {
-    title: 'Soundcloud',
-    url: 'https://soundcloud.com/jagerman',
-    Icon: AtSignIcon,
-  },
   youtube: {
     title: 'YouTube',
     url: 'https://www.youtube.com/c/jagermanmusic',
     Icon: YoutubeIcon,
-  },
-  bluesky: {
-    title: 'Bluesky',
-    url: 'https://staging.bsky.app/profile/onur.dev',
-    Icon: AtSignIcon,
-  },
-  readcv: {
-    title: 'Read.cv',
-    url: 'https://read.cv/onur',
-    Icon: AtSignIcon,
-  },
-  pinterest: {
-    title: 'Pinterest',
-    url: 'https://nl.pinterest.com/onurschu',
-    Icon: AtSignIcon,
   },
 }
 

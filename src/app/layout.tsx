@@ -9,10 +9,12 @@ import { Metadata } from 'next'
 import { sharedMetadata } from '@/constants/metadata'
 import { PROFILES } from '@/constants'
 import { MenuContent } from '@/components/menu-content'
+import { preloadGetAllPosts } from '@/lib/contentful'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
-  // preloadGetAllPosts(isEnabled)
+  preloadGetAllPosts(isEnabled)
 
   return (
     <html
@@ -37,9 +39,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className='flex flex-1'>{children}</div>
           </div>
         </main>
-        {/* <TailwindIndicator />
         <SpeedInsights />
-        <Script
+        {/* <Script
           src='https://unpkg.com/@tinybirdco/flock.js'
           data-host='https://api.tinybird.co'
           data-token={process.env.NEXT_PUBLIC_TINYBIRD_TOKEN}
