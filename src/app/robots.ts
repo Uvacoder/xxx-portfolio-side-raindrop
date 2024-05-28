@@ -2,9 +2,9 @@ export default function robots() {
   return {
     rules: {
       userAgent: '*',
-      allow: '/'
+      allow: '/',
     },
-    sitemap: 'https://onur.dev/sitemap.xml',
-    host: 'https://onur.dev'
+    sitemap: 'https://portfolio-sidebar.vercel.app/sitemap.xml',
+    host: 'https://portfolio-sidebar.vercel.app',
   }
 }

@@ -12,7 +12,7 @@ export type SharedMetadata = {
 export const sharedMetadata: SharedMetadata = {
   title: 'Nam Khanh Nguyen',
   description: 'Software Engineer, DJ, writer, and minimalist, based in Amsterdam, The Netherlands',
-  url: 'https://onur.dev',
+  url: 'https://portfolio-sidebar.vercel.app',
   ogImage: {
     width: 1200,
     height: 630,

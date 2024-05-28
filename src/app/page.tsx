@@ -22,12 +22,12 @@ export default async function Home() {
 
   return (
     <ScrollArea useScrollAreaId={true}>
-      <FloatingHeader scrollTitle='Onur Şuyalçınkaya' />
+      <FloatingHeader scrollTitle='Nam Nguyen' />
       <div className='content-wrapper'>
         <div className='content'>
           <PageTitle title='Home' className='lg:hidden' />
           <p>
-            Hi 👋 I&apos;m Onur (meaning &quot;Honour&quot; in English), a software engineer, dj,
+            Hi 👋 I&apos;m Namm (meaning &quot;Honour&quot; in English), a software engineer, dj,
             writer, and minimalist based in Amsterdam, The Netherlands.
           </p>
           <p>

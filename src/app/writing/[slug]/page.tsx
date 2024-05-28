@@ -50,9 +50,9 @@ export default async function WritingSlug({ params }) {
     dateModified,
     author: {
       '@type': 'Person',
-      name: 'Onur Şuyalçınkaya',
+      name: 'Nam Khanh Nguyen',
     },
-    url: `https://onur.dev/writing/${slug}`,
+    url: `https://portfolio-sidebar.vercel.app/writing/${slug}`,
   }
   // console.log(content.links.entries)
 

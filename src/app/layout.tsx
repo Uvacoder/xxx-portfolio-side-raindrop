@@ -52,7 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://onur.dev'),
+  metadataBase: new URL('https://portfolio-sidebar.vercel.app'),
   robots: {
     index: true,
     follow: true,
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     template: `%s — ${sharedMetadata.title}`,
   },
   description: sharedMetadata.description,
-  keywords: ['Onur Şuyalçınkaya', 'Onur Suyalcinkaya', 'onur dev', 'onur.dev'],
+  keywords: ['Nam Khanh Nguyen', 'Nam Nguyen', 'namm dev', 'nammdev.vn'],
   openGraph: {
     title: {
       default: sharedMetadata.title,
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     },
     description: sharedMetadata.description,
     type: 'website',
-    url: 'https://onur.dev',
+    url: 'https://portfolio-sidebar.vercel.app',
     siteName: sharedMetadata.title,
     locale: 'en_IE',
   },
