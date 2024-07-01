@@ -42,7 +42,7 @@ const ProjectCard = (props: ProjectCardProps) => {
         src={`/images/projects/${slug}/cover.png`}
         width={1280}
         height={832}
-        imageClassName='group-hover:scale-105'
+        imageClassName='group-hover:scale-105 border-none'
         alt={name}
         className='rounded-lg'
       />
