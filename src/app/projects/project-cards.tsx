@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback, useMemo } from 'react'
 import { Link } from './link'
 import { BlurImage } from './ui'
 
@@ -21,11 +22,32 @@ export type ProjectCardsProps = {
 const ProjectCards = (props: ProjectCardsProps) => {
   const { projects } = props
 
+  const getChunks = useCallback(() => {
+    const firstChunk: ProjectMetadata[] = []
+    const lastChunk: ProjectMetadata[] = []
+    projects.forEach((element, index) => {
+      if (index % 2 === 0) {
+        firstChunk.push(element)
+      } else {
+        lastChunk.push(element)
+      }
+    })
+    return [[...firstChunk], [...lastChunk]]
+  }, [projects])
+
+  const chunks = useMemo(() => getChunks(), [getChunks])
+
   return (
-    <div className='grid gap-4 md:grid-cols-2'>
-      {projects.map((project) => (
-        <ProjectCard key={project.slug} {...project} />
-      ))}
+    <div className='grid md:grid-cols-2 gap-8'>
+      {chunks.map((chunk, chunkIndex) => {
+        return (
+          <div key={`chunk_${chunkIndex}`} className='grid gap-8 place-content-start'>
+            {chunk.map((projecgt) => {
+              return <ProjectCard key={projecgt.slug} {...projecgt} />
+            })}
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -34,10 +56,7 @@ const ProjectCard = (props: ProjectCardProps) => {
   const { name, description, techstack, slug } = props
 
   return (
-    <Link
-      href={`/projects/${slug}`}
-      className='group rounded-xl px-2 py-4 shadow-feature-card dark:shadow-feature-card-dark'
-    >
+    <Link href={`/projects/${slug}`} className='group rounded-xl px-2 py-4 '>
       <BlurImage
         src={`/images/projects/${slug}/cover.png`}
         width={1280}
