@@ -27,8 +27,8 @@ export default async function Home() {
         <div className='content'>
           <PageTitle title='Home' className='lg:hidden' />
           <p>
-            Hi 👋 I&apos;m Namm (meaning &quot;Honour&quot; in English), a software engineer, dj,
-            writer, and minimalist based in Hanoi, Vietnam.
+            Hi 👋 I&apos;m Namm, a software engineer, tour guider, writer, and minimalist based in
+            Hanoi, Vietnam.
           </p>
           <p>
             I develop things as a Senior Frontend Software Engineer at Bitvavo. Previously, I worked
