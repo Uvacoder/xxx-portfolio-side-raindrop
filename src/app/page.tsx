@@ -28,7 +28,8 @@ export default async function Home() {
           <PageTitle title='Home' className='lg:hidden' />
           <p>
             Hi 👋 I&apos;m Namm, a software engineer, tour guider, writer, and minimalist based in
-            Hanoi, Vietnam. I love to build things, write about things, and share things.
+            Hanoi, Vietnam. I love to build things, write about things, and share things. Avaiable
+            for job opportunities, freelance work, and collaborations.
           </p>
           <p>
             I develop things as a Senior Frontend Software Engineer at Bitvavo. Previously, I worked
